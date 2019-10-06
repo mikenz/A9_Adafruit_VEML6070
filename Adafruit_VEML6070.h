@@ -11,18 +11,13 @@
  * please support Adafruit and open-source hardware by purchasing
  * products from Adafruit!
  *
- * Written by Limor Fried/Ladyada for Adafruit Industries.  
+ * Written by Limor Fried/Ladyada for Adafruit Industries.
  *
  * BSD license, all text here must be included in any redistribution.
  *
  */
 
-#if (ARDUINO >= 100)
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
-#include "Wire.h"
+#include "api_hal_i2c.h"
 
 // really unusual way of getting data, your read from two different addrs!
 
@@ -32,7 +27,7 @@
 
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  integration time definitions
 */
 /**************************************************************************/
@@ -45,7 +40,7 @@ typedef enum veml6070_integrationtime {
 
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  Class that stores state and functions for interacting with VEML6070 sensor IC
 */
 /**************************************************************************/
@@ -53,15 +48,16 @@ class Adafruit_VEML6070 {
  public:
   Adafruit_VEML6070();
 
-  void begin(veml6070_integrationtime_t itime, TwoWire *twoWire = &Wire);
+  void begin(I2C_ID_t i2c, veml6070_integrationtime_t itime);
   void setInterrupt(bool state, bool level = 0);
   bool clearAck();
   uint16_t readUV(void);
   void waitForNext(void);
   void sleep(bool state);
  private:
+  I2C_ID_t _i2c;
+  I2C_Config_t _i2cConfig;
   void writeCommand(void);
-  TwoWire *_i2c;
 
   typedef union {
     struct {
