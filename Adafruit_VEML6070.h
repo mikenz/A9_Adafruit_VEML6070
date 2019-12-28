@@ -11,17 +11,13 @@
  * please support Adafruit and open-source hardware by purchasing
  * products from Adafruit!
  *
- * Written by Limor Fried/Ladyada for Adafruit Industries.  
+ * Written by Limor Fried/Ladyada for Adafruit Industries.
  *
  * BSD license, all text here must be included in any redistribution.
  *
  */
 
-#if (ARDUINO >= 100)
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 #include "Wire.h"
 
 // really unusual way of getting data, your read from two different addrs!
@@ -32,7 +28,7 @@
 
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  integration time definitions
 */
 /**************************************************************************/
@@ -45,7 +41,7 @@ typedef enum veml6070_integrationtime {
 
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  Class that stores state and functions for interacting with VEML6070 sensor IC
 */
 /**************************************************************************/

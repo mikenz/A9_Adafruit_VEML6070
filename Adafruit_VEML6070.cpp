@@ -28,17 +28,13 @@
  *
  */
 
-#if (ARDUINO >= 100)
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+#include "Arduino.h"
 #include "Wire.h"
 
 #include "Adafruit_VEML6070.h"
 
 /**************************************************************************/
-/*! 
+/*!
     @brief constructor initializes default configuration value
 */
 /**************************************************************************/
@@ -48,7 +44,7 @@ Adafruit_VEML6070::Adafruit_VEML6070() {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  setup and initialize communication with the hardware
     @param itime the integration time to use for the data
     @param twoWire Optional pointer to the desired TwoWire I2C object. Defaults to &Wire
@@ -64,7 +60,7 @@ void Adafruit_VEML6070::begin(veml6070_integrationtime_t itime, TwoWire *twoWire
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  Set the threshold-based interrupt feature
     @param  state true to enable, false to disable
     @param  level 1 for threshold value of 145, 0 for 102 (default)
@@ -79,7 +75,7 @@ void Adafruit_VEML6070::setInterrupt(bool state, bool level) {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  Clear possible interrupt state (ACK active) by reading register
             If set, MUST be cleared before device will respond at other
             I2C addresses.
@@ -93,7 +89,7 @@ bool Adafruit_VEML6070::clearAck() {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  read the chips UV sensor
     @return the UV reading as a 16 bit integer
 */
@@ -107,11 +103,11 @@ uint16_t Adafruit_VEML6070::readUV() {
   if (_i2c->requestFrom(VEML6070_ADDR_L, 1) != 1) return -1;
   uvi |= _i2c->read();
 
-  return uvi;  
+  return uvi;
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  wait for one integration period (with ~10% clock error margin)
 */
 /**************************************************************************/
@@ -128,7 +124,7 @@ void Adafruit_VEML6070::waitForNext() {
 }
 
 /**************************************************************************/
-/*! 
+/*!
     @brief  enter or exit sleep (shutdown) mode. While in sleep mode
       the chip draws ~1uA
     @param state true to enter sleep mode, false to exit
@@ -142,7 +138,7 @@ void Adafruit_VEML6070::sleep(bool state) {
 
 
 /**************************************************************************/
-/*! 
+/*!
     @brief write current internal _commandRegister value to device
 */
 /**************************************************************************/
